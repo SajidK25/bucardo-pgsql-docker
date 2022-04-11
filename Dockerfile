@@ -21,12 +21,13 @@ RUN cd /tmp \
     && cd /tmp \
     && rm -rf Bucardo-${BUCARDO_VERSION}*
 
-ADD cofigs/pg_hba.conf /etc/postgresql/${PG_VERSION}/main/pg_hba.conf
-ADD cofigs/bucardorc /etc/bucardorc
-ADD ./startup.sh ./startup.sh
+ADD configs/pg_hba.conf /etc/postgresql/${PG_VERSION}/main/pg_hba.conf
+ADD configs/bucardorc /etc/bucardorc
+ADD /startup.sh /startup.sh
 
 RUN chown postgres /etc/postgresql/${PG_VERSION}/main/pg_hba.conf
 RUN chown postgres /etc/bucardorc
+RUN chmod +x /startup.sh
 RUN mkdir -p /var/log/bucardo && chown postgres /var/log/bucardo
 RUN mkdir -p /var/run/bucardo && chown postgres /var/run/bucardo
 
